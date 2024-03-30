@@ -1,0 +1,29 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+  <path
+      android:strokeWidth="1"
+      android:pathData="M16,0.5L84,0.5A15.5,15.5 0,0 1,99.5 16L99.5,84A15.5,15.5 0,0 1,84 99.5L16,99.5A15.5,15.5 0,0 1,0.5 84L0.5,16A15.5,15.5 0,0 1,16 0.5z"
+      android:fillColor="#00000000"
+      android:strokeColor="#00000000"/>
+  <path
+      android:pathData="M18,10L22,10A8,8 0,0 1,30 18L30,22A8,8 0,0 1,22 30L18,30A8,8 0,0 1,10 22L10,18A8,8 0,0 1,18 10z"
+      android:fillColor="@color/md_theme_light_primary"/>
+  <path
+      android:pathData="M48,10L82,10A8,8 0,0 1,90 18L90,22A8,8 0,0 1,82 30L48,30A8,8 0,0 1,40 22L40,18A8,8 0,0 1,48 10z"
+      android:fillColor="@color/md_theme_light_primary"/>
+  <path
+      android:pathData="M18,40L22,40A8,8 0,0 1,30 48L30,52A8,8 0,0 1,22 60L18,60A8,8 0,0 1,10 52L10,48A8,8 0,0 1,18 40z"
+      android:fillColor="@color/md_theme_light_primary"/>
+  <path
+      android:pathData="M48,40L82,40A8,8 0,0 1,90 48L90,52A8,8 0,0 1,82 60L48,60A8,8 0,0 1,40 52L40,48A8,8 0,0 1,48 40z"
+      android:fillColor="@color/md_theme_light_primary"/>
+  <path
+      android:pathData="M18,70L22,70A8,8 0,0 1,30 78L30,82A8,8 0,0 1,22 90L18,90A8,8 0,0 1,10 82L10,78A8,8 0,0 1,18 70z"
+      android:fillColor="@color/md_theme_light_primary"/>
+  <path
+      android:pathData="M48,70L82,70A8,8 0,0 1,90 78L90,82A8,8 0,0 1,82 90L48,90A8,8 0,0 1,40 82L40,78A8,8 0,0 1,48 70z"
+      android:fillColor="@color/md_theme_light_primary"/>
+</vector>
