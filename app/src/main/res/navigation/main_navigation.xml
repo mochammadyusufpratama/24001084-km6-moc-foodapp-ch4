@@ -11,4 +11,10 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
 
+    <fragment
+        android:id="@+id/menu_tab_cart"
+        android:name="com.app.makanku.presentation.cart.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
+
 </navigation>
