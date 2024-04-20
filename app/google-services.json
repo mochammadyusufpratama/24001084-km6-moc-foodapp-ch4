@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "625177182636",
+    "project_id": "foodappauth-a94cd",
+    "storage_bucket": "foodappauth-a94cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625177182636:android:d574db13e34a134f50fa09",
+        "android_client_info": {
+          "package_name": "com.app.makanku"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBT6JSskkQo0GXMxwrrUwsogsRY0mRfmoY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:625177182636:android:c67a758426f768e650fa09",
+        "android_client_info": {
+          "package_name": "com.catnip.firebaseauthexample"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBT6JSskkQo0GXMxwrrUwsogsRY0mRfmoY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
