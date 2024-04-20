@@ -10,12 +10,18 @@ import coil.load
 import com.app.makanku.R
 import com.app.makanku.data.datasource.category.DummyCategoryDataSource
 import com.app.makanku.data.datasource.product.DummyProductDataSource
+import com.app.makanku.data.datasource.user.AuthDataSource
+import com.app.makanku.data.datasource.user.FirebaseAuthDataSource
 import com.app.makanku.data.model.Category
 import com.app.makanku.data.model.Product
 import com.app.makanku.data.repository.CategoryRepository
 import com.app.makanku.data.repository.CategoryRepositoryImpl
 import com.app.makanku.data.repository.ProductRepository
 import com.app.makanku.data.repository.ProductRepositoryImpl
+import com.app.makanku.data.repository.UserRepository
+import com.app.makanku.data.repository.UserRepositoryImpl
+import com.app.makanku.data.source.firebase.FirebaseService
+import com.app.makanku.data.source.firebase.FirebaseServiceImpl
 import com.app.makanku.databinding.FragmentHomeBinding
 import com.app.makanku.presentation.detailproduct.DetailProductActivity
 import com.app.makanku.presentation.home.adapter.CategoryListAdapter
@@ -27,11 +33,25 @@ class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
 
     private val viewModel: HomeViewModel by viewModels {
+        val service: FirebaseService = FirebaseServiceImpl()
+
         val productDataSource = DummyProductDataSource()
         val productRepository: ProductRepository = ProductRepositoryImpl(productDataSource)
+
         val categoryDataSource = DummyCategoryDataSource()
         val categoryRepository: CategoryRepository = CategoryRepositoryImpl(categoryDataSource)
-        GenericViewModelFactory.create(HomeViewModel(categoryRepository, productRepository))
+
+        val authDataSource: AuthDataSource = FirebaseAuthDataSource(service)
+        val userRepository: UserRepository = UserRepositoryImpl(authDataSource)
+
+        GenericViewModelFactory.create(
+            HomeViewModel(
+                categoryRepository,
+                productRepository,
+                userRepository
+            )
+        )
+
     }
 
     private val categoryAdapter: CategoryListAdapter by lazy {
@@ -59,6 +79,19 @@ class HomeFragment : Fragment() {
         bindCategoryList(viewModel.getCategories())
         bindProductList(viewModel.getProducts())
         binding.layoutBanner.ivBanner.load("https://github.com/mochammadyusufpratama/makanku-asset/blob/main/bg_banner.jpg?raw=true")
+        setDisplayName()
+    }
+
+    private fun setDisplayName() {
+        if (!viewModel.userIsLoggedIn()) {
+            binding.layoutHeader.layoutHeader.tvName.apply {
+                text = getString(R.string.text_display_name, "John Doe")
+            }
+        } else {
+            val currentUser = viewModel.getCurrentUser()
+            binding.layoutHeader.layoutHeader.tvName.text =
+                getString(R.string.text_display_name, currentUser?.fullName)
+        }
     }
 
     private fun bindCategoryList(data: List<Category>) {

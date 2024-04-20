@@ -8,133 +8,78 @@
     tools:context=".presentation.profile.ProfileFragment">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
+        android:id="@+id/cl_profile"
+        android:layout_width="100dp"
         android:layout_height="100dp"
+        app:cardCornerRadius="8dp"
+        android:layout_marginEnd="16dp"
+        android:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="-20dp"
-        app:cardCornerRadius="16dp">
+        app:layout_constraintVertical_bias="0.1">
 
         <ImageView
+            android:id="@+id/iv_profile_pict"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/bg_orange_header"/>
-
-        <TextView
-            android:layout_marginTop="50dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Hi, Mochammad Yusuf"
-            android:textColor="@color/md_theme_light_onPrimary"
-            android:textSize="16sp" />
+            tools:src="@tools:sample/avatars" />
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/iv_profile_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="16dp"
-        android:elevation="-10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="30dp"
-        android:layout_marginHorizontal="16dp"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/iv_profile"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"/>
-
-    </androidx.cardview.widget.CardView>
-
-    <LinearLayout
+    <include
+        android:id="@+id/layout_form"
+        layout="@layout/layout_user_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginHorizontal="16dp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_profile"
+        app:layout_constraintVertical_bias="0"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <FrameLayout
+        android:id="@+id/fl_btn_loading_state"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/layout_form">
+
+        <Button
+            android:id="@+id/btn_change_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/text_change_profile" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/pb_loading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_change_pwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/text_change_password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fl_btn_loading_state" />
+
+    <TextView
+        android:id="@+id/tv_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/iv_profile_container">
-
-        <!-- Name Input -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/name_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintTop_toBottomOf="@id/iv_profile_container">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/name_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:hint="Name"
-                android:text="John Doe" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Username Input -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/username_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/username_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:hint="Username"
-                android:text="johnDoe" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Email Input -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/email_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/email_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:hint="Email"
-                android:inputType="textEmailAddress"
-                android:text="example@gmail.com" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btn_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_orange_header"
-            android:padding="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginTop="16dp">
-
-            <TextView
-                android:id="@+id/tv_btn_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Edit Profile"
-                android:textColor="@color/md_theme_light_onPrimary"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
-
-
+        android:padding="8dp"
+        android:text="@string/text_logout"
+        android:textColor="@color/md_theme_light_error"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_change_pwd" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

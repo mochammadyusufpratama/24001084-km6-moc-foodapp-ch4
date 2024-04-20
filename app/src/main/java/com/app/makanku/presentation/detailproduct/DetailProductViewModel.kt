@@ -47,4 +47,5 @@ class DetailProductViewModel(
             cartRepository.createCart(it, quantity).asLiveData(Dispatchers.IO)
         } ?: liveData { emit(ResultWrapper.Error(IllegalStateException("Product not found"))) }
     }
+
 }
