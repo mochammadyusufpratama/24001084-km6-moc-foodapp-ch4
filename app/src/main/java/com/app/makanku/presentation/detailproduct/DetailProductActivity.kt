@@ -14,7 +14,7 @@ import coil.load
 import com.app.makanku.R
 import com.app.makanku.data.datasource.cart.CartDataSource
 import com.app.makanku.data.datasource.cart.CartDatabaseDataSource
-import com.app.makanku.data.model.Product
+import com.app.makanku.data.model.Menu
 import com.app.makanku.data.repository.CartRepository
 import com.app.makanku.data.repository.CartRepositoryImpl
 import com.app.makanku.data.source.local.database.AppDatabase
@@ -108,33 +108,47 @@ class DetailProductActivity : AppCompatActivity() {
         }
     }
 
-    private fun bindProduct(product: Product?) {
-        product?.let { item ->
-            binding.ivProductImage.load(item.imgUrl) {
+    private fun bindProduct(menu: Menu?) {
+        menu?.let { item ->
+            binding.ivProductImage.load(item.imageUrl) {
                 crossfade(true)
             }
             binding.tvProductName.text = item.name
             binding.tvProductDesc.text = item.desc
             binding.tvProductPrice.text = item.price.indonesianCurrency()
-            binding.tvProductLocation.text = item.location
+            binding.tvProductLocation.text = item.locationAddress
         }
     }
 
     private fun observeData() {
         viewModel.priceLiveData.observe(this) {
             binding.btnAddToCart.isEnabled = it != 0.0
-            binding.tvBtnText.text = "Tambah ke Keranjang - " + it.indonesianCurrency()
+            binding.tvBtnText.text = getString(R.string.text_add_to_cart, it.indonesianCurrency())
         }
         viewModel.productCountLiveData.observe(this) {
             binding.tvNominal.text = it.toString()
         }
     }
 
+    private fun navigateToGoogleMaps(menu: Menu?) {
+        menu?.let { item->
+            binding.tvProductLocation.setOnClickListener {
+                openGoogleMaps(item.locationUrl)
+            }
+        }
+    }
+
+    private fun openGoogleMaps(it: String) {
+        val gmmIntentUri = Uri.parse(it)
+        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+        startActivity(mapIntent)
+    }
+
     companion object {
         const val EXTRA_PRODUCT = "EXTRA_PRODUCT"
-        fun startActivity(context: Context, product: Product) {
+        fun startActivity(context: Context, menu: Menu) {
             val intent = Intent(context, DetailProductActivity::class.java)
-            intent.putExtra(EXTRA_PRODUCT, product)
+            intent.putExtra(EXTRA_PRODUCT, menu)
             context.startActivity(intent)
         }
     }

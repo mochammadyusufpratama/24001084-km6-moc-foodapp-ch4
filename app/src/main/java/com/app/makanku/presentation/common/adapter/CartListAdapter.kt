@@ -19,17 +19,10 @@ class CartListAdapter(private val cartListener: CartListener? = null) :
 
     private val dataDiffer =
         AsyncListDiffer(this, object : DiffUtil.ItemCallback<Cart>() {
-            override fun areItemsTheSame(
-                oldItem: Cart,
-                newItem: Cart
-            ): Boolean {
-                return oldItem.id == newItem.id && oldItem.productId == newItem.productId
+            override fun areItemsTheSame(oldItem: Cart, newItem: Cart): Boolean {
+                return oldItem.id == newItem.id
             }
-
-            override fun areContentsTheSame(
-                oldItem: Cart,
-                newItem: Cart
-            ): Boolean {
+            override fun areContentsTheSame(oldItem: Cart, newItem: Cart): Boolean {
                 return oldItem.hashCode() == newItem.hashCode()
             }
         })
@@ -55,7 +48,6 @@ class CartListAdapter(private val cartListener: CartListener? = null) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as ViewHolderBinder<Cart>).bind(dataDiffer.currentList[position])
     }
-
 }
 
 class CartViewHolder(
@@ -67,18 +59,16 @@ private val cartListener: CartListener?
         setCartNotes(item)
         setClickListeners(item)
     }
-
     private fun setCartData(item: Cart) {
         with(binding) {
-            binding.ivProductImage.load(item.productImgUrl) {
+            binding.ivProductImage.load(item.menuImgUrl) {
                 crossfade(true)
             }
             tvProductCount.text = item.itemQuantity.toString()
-            tvProductName.text = item.productName
-            tvProductPrice.text = (item.itemQuantity * item.productPrice).indonesianCurrency()
+            tvProductName.text = item.menuName
+            tvProductPrice.text = (item.itemQuantity * item.menuPrice).indonesianCurrency()
         }
     }
-
     private fun setCartNotes(item: Cart) {
         binding.etNotesItem.setText(item.itemNotes)
         binding.etNotesItem.doneEditing {
@@ -89,7 +79,6 @@ private val cartListener: CartListener?
             cartListener?.onUserDoneEditingNotes(newItem)
         }
     }
-
     private fun setClickListeners(item: Cart) {
         with(binding) {
             ivMinus.setOnClickListener { cartListener?.onMinusTotalItemCartClicked(item) }
@@ -107,10 +96,9 @@ class CartOrderViewHolder(
         setCartData(item)
         setCartNotes(item)
     }
-
     private fun setCartData(item: Cart) {
         with(binding) {
-            binding.ivProductImage.load(item.productImgUrl) {
+            binding.ivProductImage.load(item.menuImgUrl) {
                 crossfade(true)
             }
             tvTotalQuantity.text =
@@ -118,21 +106,18 @@ class CartOrderViewHolder(
                     R.string.total_quantity,
                     item.itemQuantity.toString()
                 )
-            tvProductName.text = item.productName
-            tvProductPrice.text =  item.productPrice.indonesianCurrency()
+            tvProductName.text = item.menuName
+            tvProductPrice.text =  item.menuPrice.indonesianCurrency()
         }
     }
-
     private fun setCartNotes(item: Cart) {
         binding.tvNotes.text = item.itemNotes
     }
-
 }
 
 interface CartListener {
     fun onPlusTotalItemCartClicked(cart: Cart)
     fun onMinusTotalItemCartClicked(cart: Cart)
     fun onRemoveCartClicked(cart: Cart)
-
     fun onUserDoneEditingNotes(cart: Cart)
 }

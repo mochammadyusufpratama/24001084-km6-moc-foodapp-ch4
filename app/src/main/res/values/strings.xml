@@ -36,4 +36,10 @@
     <string name="text_dialog_when_change_password">Permintaan perubahan kata sandi telah dikirim ke email Anda.</string>
     <string name="text_positive_button_dialog">Oke</string>
 
+    <string name="text_menu_name">Menu Name</string>
+    <string name="text_menu_price">Rp 20.000</string>
+
+    <string name="text_add_to_cart_default">Tambah ke Keranjang - Rp 20.000</string>
+    <string name="text_add_to_cart">Tambah ke Keranjang - %s</string>
+
 </resources>

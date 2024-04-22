@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
-import com.app.makanku.data.model.Product
+import com.app.makanku.data.model.Menu
 import com.app.makanku.data.repository.CartRepository
 import com.app.makanku.utils.ResultWrapper
 import kotlinx.coroutines.Dispatchers
@@ -17,14 +17,14 @@ class DetailProductViewModel(
     private val cartRepository: CartRepository
 ) : ViewModel() {
 
-    val product = extras?.getParcelable<Product>(DetailProductActivity.EXTRA_PRODUCT)
+    val product = extras?.getParcelable<Menu>(DetailProductActivity.EXTRA_PRODUCT)
 
     val productCountLiveData = MutableLiveData(1).apply {
         postValue(1)
     }
 
     val priceLiveData = MutableLiveData<Double>().apply {
-        postValue(0.0)
+        postValue(product?.price)
     }
 
     fun add() {
@@ -43,7 +43,7 @@ class DetailProductViewModel(
 
     fun addToCart(): LiveData<ResultWrapper<Boolean>> {
         return product?.let {
-            val quantity = productCountLiveData.value ?: 0
+            val quantity = productCountLiveData.value ?: 1
             cartRepository.createCart(it, quantity).asLiveData(Dispatchers.IO)
         } ?: liveData { emit(ResultWrapper.Error(IllegalStateException("Product not found"))) }
     }

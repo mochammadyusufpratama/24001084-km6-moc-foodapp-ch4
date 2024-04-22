@@ -18,14 +18,8 @@ import androidx.lifecycle.Observer
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.app.makanku.R
-import com.app.makanku.data.datasource.category.DummyCategoryDataSource
-import com.app.makanku.data.datasource.product.DummyProductDataSource
 import com.app.makanku.data.datasource.user.AuthDataSource
 import com.app.makanku.data.datasource.user.FirebaseAuthDataSource
-import com.app.makanku.data.repository.CategoryRepository
-import com.app.makanku.data.repository.CategoryRepositoryImpl
-import com.app.makanku.data.repository.ProductRepository
-import com.app.makanku.data.repository.ProductRepositoryImpl
 import com.app.makanku.data.repository.UserRepository
 import com.app.makanku.data.repository.UserRepositoryImpl
 import com.app.makanku.data.source.firebase.FirebaseService
@@ -101,6 +95,7 @@ class ProfileFragment : Fragment() {
         binding.tvLogout.setOnClickListener {
             viewModel.isUserLoggedOut()
             Toast.makeText(requireContext(), "Logout Success!", Toast.LENGTH_SHORT).show()
+
             navigateToLogin()
             requireActivity().supportFragmentManager.popBackStack(
                 null,
@@ -111,7 +106,9 @@ class ProfileFragment : Fragment() {
     }
 
     private fun navigateToLogin() {
-        startActivity(Intent(requireContext(), LoginActivity::class.java).apply {})
+        startActivity(Intent(requireContext(), LoginActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        })
     }
 
     private fun changeProfileData() {

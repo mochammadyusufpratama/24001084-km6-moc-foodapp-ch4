@@ -152,7 +152,7 @@
                 android:id="@+id/tv_btn_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tambah ke Keranjang - Rp20.000,00"
+                android:text="@string/text_add_to_cart_default"
                 android:textColor="@color/md_theme_light_onPrimary"
                 android:textSize="16sp"
                 android:textStyle="bold"

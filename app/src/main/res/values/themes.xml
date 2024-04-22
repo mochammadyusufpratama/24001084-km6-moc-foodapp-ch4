@@ -30,8 +30,19 @@
 
         <item name="fontFamily">@font/font_anderson_grotesk</item>
     </style>
+
     <style name="circleImageView" >
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20%</item>
     </style>
+
+    <style name="RoundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10%</item>
+    </style>
+
+    <style name="Padding" >
+        <item name="android:padding">4dp</item>
+    </style>
+
 </resources>

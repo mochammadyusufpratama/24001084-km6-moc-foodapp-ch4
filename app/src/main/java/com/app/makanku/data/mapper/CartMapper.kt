@@ -5,23 +5,22 @@ import com.app.makanku.data.source.local.database.entity.CartEntity
 
 fun Cart?.toCartEntity() = CartEntity(
     id = this?.id,
-    productId = this?.productId.orEmpty(),
+    menuId = this?.menuId.orEmpty(),
     itemQuantity = this?.itemQuantity ?: 0,
-    productName = this?.productName.orEmpty(),
-    productPrice = this?.productPrice ?: 0.0,
-    productImgUrl = this?.productImgUrl.orEmpty(),
+    menuName = this?.menuName.orEmpty(),
+    menuPrice = this?.menuPrice ?: 0.0,
+    menuImgUrl = this?.menuImgUrl.orEmpty(),
     itemNotes = this?.itemNotes
 )
 
 fun CartEntity?.toCart() = Cart(
     id = this?.id,
-    productId = this?.productId.orEmpty(),
+    menuId = this?.menuId.orEmpty(),
     itemQuantity = this?.itemQuantity ?: 0,
-    productName = this?.productName.orEmpty(),
-    productPrice = this?.productPrice ?: 0.0,
-    productImgUrl = this?.productImgUrl.orEmpty(),
+    menuName = this?.menuName.orEmpty(),
+    menuPrice = this?.menuPrice ?: 0.0,
+    menuImgUrl = this?.menuImgUrl.orEmpty(),
     itemNotes = this?.itemNotes
-
 )
 
 fun List<CartEntity?>.toCartList() = this.map { it.toCart() }
