@@ -10,7 +10,7 @@ import com.app.makanku.data.source.local.database.entity.CartEntity
 
 @Database(
     entities = [CartEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = true
 )
 

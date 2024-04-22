@@ -74,6 +74,6 @@
         app:layout_constraintVertical_bias="0.0"
         app:spanCount="2"
         tools:layout_editor_absoluteX="-42dp"
-        tools:listitem="@layout/item_product" />
+        tools:listitem="@layout/item_menu_grid" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

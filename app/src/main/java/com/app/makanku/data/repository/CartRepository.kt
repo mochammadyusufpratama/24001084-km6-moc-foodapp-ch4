@@ -5,7 +5,7 @@ import com.app.makanku.data.mapper.toCartEntity
 import com.app.makanku.data.mapper.toCartList
 import com.app.makanku.data.model.Cart
 import com.app.makanku.data.model.PriceItem
-import com.app.makanku.data.model.Product
+import com.app.makanku.data.model.Menu
 import com.app.makanku.data.source.local.database.entity.CartEntity
 import com.app.makanku.utils.ResultWrapper
 import com.app.makanku.utils.proceed
@@ -21,7 +21,7 @@ interface CartRepository {
     fun getUserCartData(): Flow<ResultWrapper<Pair<List<Cart>, Double>>>
     fun getCheckoutData(): Flow<ResultWrapper<Triple<List<Cart>, List<PriceItem>, Double>>>
     fun createCart(
-        product: Product,
+        Menu: Menu,
         quantity: Int,
         notes: String? = null
     ): Flow<ResultWrapper<Boolean>>
@@ -42,7 +42,7 @@ class CartRepositoryImpl(private val cartDataSource: CartDataSource) : CartRepos
                 //mapping into cart list and sum the total price
                 proceed {
                     val result = it.toCartList()
-                    val totalPrice = result.sumOf { it.productPrice * it.itemQuantity }
+                    val totalPrice = result.sumOf { it.menuPrice * it.itemQuantity }
                     Pair(result, totalPrice)
                 }
             }.map {
@@ -62,7 +62,7 @@ class CartRepositoryImpl(private val cartDataSource: CartDataSource) : CartRepos
                 proceed {
                     val result = it.toCartList()
                     val priceItemList =
-                        result.map { PriceItem(it.productName, it.productPrice * it.itemQuantity) }
+                        result.map { PriceItem(it.menuName, it.menuPrice * it.itemQuantity) }
                     val totalPrice = priceItemList.sumOf { it.total }
                     Triple(result, priceItemList, totalPrice)
                 }
@@ -77,20 +77,20 @@ class CartRepositoryImpl(private val cartDataSource: CartDataSource) : CartRepos
     }
 
     override fun createCart(
-        product: Product,
+        menu: Menu,
         quantity: Int,
         notes: String?
     ): Flow<ResultWrapper<Boolean>> {
-        return product.id?.let { productId ->
+        return menu.id?.let { menuId ->
             //when id is not null
             proceedFlow {
                 val affectedRow = cartDataSource.insertCart(
                     CartEntity(
-                        productId = productId,
+                        menuId = menuId,
                         itemQuantity = quantity,
-                        productName = product.name,
-                        productImgUrl = product.imgUrl,
-                        productPrice = product.price,
+                        menuName = menu.name,
+                        menuImgUrl = menu.imageUrl,
+                        menuPrice = menu.price,
                         itemNotes = notes
                     )
                 )

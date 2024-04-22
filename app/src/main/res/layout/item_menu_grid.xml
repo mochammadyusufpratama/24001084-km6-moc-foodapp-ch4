@@ -7,36 +7,30 @@
     android:orientation="vertical"
     android:layout_marginHorizontal="8dp">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_menu_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
-        android:elevation="-10dp">
-
-        <ImageView
-            android:id="@+id/iv_image_product"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:scaleType="centerCrop"
-            tools:src="@tools:sample/avatars"
-            android:layout_gravity="center" />
-
-    </androidx.cardview.widget.CardView>
+        android:layout_height="120dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/RoundedImageView"
+        tools:src="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/tv_product_name"
+        android:id="@+id/tv_menu_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Food"
+        android:text="@string/text_menu_name"
         android:textColor="@color/md_theme_light_onBackground"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:layout_marginTop="12dp"/>
 
     <TextView
-        android:id="@+id/tv_product_price"
+        android:id="@+id/tv_menu_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Rp50.0000,00"
+        android:text="@string/text_menu_price"
         android:textColor="@color/md_theme_light_onSurface"
         android:textSize="12sp"
         android:textStyle="bold"

@@ -5,12 +5,13 @@ import kotlinx.parcelize.Parcelize
 import java.util.UUID
 
 @Parcelize
-data class Product(
+data class Menu(
     var id: String? = UUID.randomUUID().toString(),
+    var imageUrl: String,
     var name: String,
-    var imgUrl: String,
+    var formattedPrice : String,
     var price: Double,
-    var desc: String,
-    var location: String,
-    var locationUrl: String
-): Parcelable
+    val desc: String,
+    val locationUrl: String,
+    val locationAddress: String
+) : Parcelable
