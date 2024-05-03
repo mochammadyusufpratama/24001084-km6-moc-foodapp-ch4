@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CartDao {
-
     @Query("SELECT * FROM CARTS")
     fun getAllCarts(): Flow<List<CartEntity>>
 
@@ -26,5 +25,4 @@ interface CartDao {
 
     @Query("DELETE FROM CARTS")
     suspend fun deleteAll()
-
 }

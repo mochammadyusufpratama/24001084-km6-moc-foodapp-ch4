@@ -6,7 +6,7 @@ import com.app.makanku.data.source.network.model.menu.MenuResponse
 import com.app.makanku.data.source.network.services.FoodAppApiService
 
 class MenuApiDataSource(
-    private val service: FoodAppApiService
+    private val service: FoodAppApiService,
 ) : MenuDataSource {
     override suspend fun getMenuData(categoryName: String?): MenuResponse {
         return service.getMenu(categoryName)
@@ -15,5 +15,4 @@ class MenuApiDataSource(
     override suspend fun createOrder(payload: CheckoutRequestPayload): CheckoutResponse {
         return service.createOrder(payload)
     }
-
 }

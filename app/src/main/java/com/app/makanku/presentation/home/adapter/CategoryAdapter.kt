@@ -13,7 +13,6 @@ import com.app.makanku.databinding.ItemCategoryBinding
 
 class CategoryAdapter(private val itemClick: (Category) -> Unit) :
     RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
-
     private var selectedCategory = RecyclerView.NO_POSITION
     private var onItemClickListener: ((Category) -> Unit)? = null
 
@@ -25,25 +24,39 @@ class CategoryAdapter(private val itemClick: (Category) -> Unit) :
         asyncDataDiffer.submitList(items)
     }
 
-    private val asyncDataDiffer = AsyncListDiffer<Category>(
-        this, object : DiffUtil.ItemCallback<Category>() {
-            override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
-                return oldItem.id == newItem.id
-            }
+    private val asyncDataDiffer =
+        AsyncListDiffer<Category>(
+            this,
+            object : DiffUtil.ItemCallback<Category>() {
+                override fun areItemsTheSame(
+                    oldItem: Category,
+                    newItem: Category,
+                ): Boolean {
+                    return oldItem.id == newItem.id
+                }
 
-            override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {
-                return oldItem == newItem
-            }
-        }
-    )
+                override fun areContentsTheSame(
+                    oldItem: Category,
+                    newItem: Category,
+                ): Boolean {
+                    return oldItem == newItem
+                }
+            },
+        )
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): CategoryViewHolder {
         val binding =
             ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CategoryViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: CategoryViewHolder,
+        position: Int,
+    ) {
         holder.bind(asyncDataDiffer.currentList[position])
     }
 
@@ -51,7 +64,6 @@ class CategoryAdapter(private val itemClick: (Category) -> Unit) :
 
     inner class CategoryViewHolder(private val binding: ItemCategoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         init {
             itemView.setOnClickListener {
                 val position = adapterPosition
@@ -87,5 +99,4 @@ class CategoryAdapter(private val itemClick: (Category) -> Unit) :
             }
         }
     }
-
 }

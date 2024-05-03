@@ -1,8 +1,6 @@
 package com.app.makanku.data.datasource.category
 
-import com.app.makanku.data.model.Category
-
-//class DummyCategoryDataSource : CategoryDataSource {
+// class DummyCategoryDataSource : CategoryDataSource {
 //    override fun getCategories(): List<Category> {
 //        return listOf(
 //            Category(
@@ -21,4 +19,4 @@ import com.app.makanku.data.model.Category
 //                name = "Dessert",
 //                imgUrl = "https://github.com/mochammadyusufpratama/makanku-asset/blob/main/img_food.jpg?raw=true"),)
 //    }
-//}
+// }

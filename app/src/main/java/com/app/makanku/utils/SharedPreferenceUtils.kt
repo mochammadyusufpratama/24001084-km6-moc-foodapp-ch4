@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 
 object SharedPreferenceUtils {
-
     fun createPreference(
         context: Context,
         name: String,
@@ -52,5 +51,4 @@ object SharedPreferenceUtils {
             Long::class -> getLong(key, defaultValue as? Long ?: -1) as T
             else -> throw UnsupportedOperationException("Not yet implemented")
         }
-
 }

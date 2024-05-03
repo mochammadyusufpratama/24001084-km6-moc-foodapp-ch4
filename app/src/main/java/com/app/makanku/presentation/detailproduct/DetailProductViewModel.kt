@@ -14,18 +14,19 @@ import java.lang.IllegalStateException
 
 class DetailProductViewModel(
     private val extras: Bundle?,
-    private val cartRepository: CartRepository
+    private val cartRepository: CartRepository,
 ) : ViewModel() {
-
     val product = extras?.getParcelable<Menu>(DetailProductActivity.EXTRA_PRODUCT)
 
-    val productCountLiveData = MutableLiveData(1).apply {
-        postValue(1)
-    }
+    val productCountLiveData =
+        MutableLiveData(1).apply {
+            postValue(1)
+        }
 
-    val priceLiveData = MutableLiveData<Double>().apply {
-        postValue(product?.price)
-    }
+    val priceLiveData =
+        MutableLiveData<Double>().apply {
+            postValue(product?.price)
+        }
 
     fun add() {
         val count = (productCountLiveData.value ?: 0) + 1
@@ -47,5 +48,4 @@ class DetailProductViewModel(
             cartRepository.createCart(it, quantity).asLiveData(Dispatchers.IO)
         } ?: liveData { emit(ResultWrapper.Error(IllegalStateException("Product not found"))) }
     }
-
 }

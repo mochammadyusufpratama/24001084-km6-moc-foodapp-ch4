@@ -88,7 +88,7 @@ fun <T> proceedFlow(block: suspend () -> T): Flow<ResultWrapper<T>> {
                 ResultWrapper.Empty(result)
             } else {
                 ResultWrapper.Success(result)
-            }
+            },
         )
     }.catch { e ->
         emit(ResultWrapper.Error(exception = Exception(e)))

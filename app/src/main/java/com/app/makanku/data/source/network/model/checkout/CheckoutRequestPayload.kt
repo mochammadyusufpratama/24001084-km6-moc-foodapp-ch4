@@ -10,5 +10,5 @@ data class CheckoutRequestPayload(
     @SerializedName("total")
     val total: Int?,
     @SerializedName("username")
-    val username: String?
+    val username: String?,
 )

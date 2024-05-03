@@ -10,17 +10,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val repository: UserRepository) : ViewModel() {
-
     private val _loginResult = MutableLiveData<ResultWrapper<Boolean>>()
     val loginResult: LiveData<ResultWrapper<Boolean>>
         get() = _loginResult
 
-    fun doLogin(email: String, password: String) {
+    fun doLogin(
+        email: String,
+        password: String,
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.doLogin(email, password).collect {
                 _loginResult.postValue(it)
             }
         }
     }
-
 }

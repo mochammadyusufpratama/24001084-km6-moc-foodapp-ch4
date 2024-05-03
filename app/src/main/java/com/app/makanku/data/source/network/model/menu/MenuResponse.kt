@@ -1,7 +1,6 @@
 package com.app.makanku.data.source.network.model.menu
 
 import com.google.gson.annotations.SerializedName
-import com.app.makanku.data.source.network.model.category.CategoryItemResponse
 
 data class MenuResponse(
     @SerializedName("status")
@@ -11,5 +10,5 @@ data class MenuResponse(
     @SerializedName("message")
     val message: String?,
     @SerializedName("data")
-    val data: List<MenuItemResponse>
+    val data: List<MenuItemResponse>,
 )
