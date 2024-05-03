@@ -9,14 +9,14 @@ import com.app.makanku.utils.indonesianCurrency
 
 class MenuGridViewHolder(
     private val binding: ItemMenuGridBinding,
-    private val listener: MenuAdapter.OnItemClickedListener<Menu>
+    private val listener: MenuAdapter.OnItemClickedListener<Menu>,
 ) : ViewHolder(binding.root), ViewHolderBinder<Menu> {
     override fun bind(item: Menu) {
         item.let {
             binding.ivMenuImage.load(it.imageUrl)
             binding.tvMenuName.text = it.name
             binding.tvMenuPrice.text = it.price.indonesianCurrency()
-            itemView.setOnClickListener{
+            itemView.setOnClickListener {
                 listener.onItemSelected(item)
             }
         }

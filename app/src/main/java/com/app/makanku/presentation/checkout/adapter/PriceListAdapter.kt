@@ -9,27 +9,26 @@ import com.app.makanku.data.model.PriceItem
 import com.app.makanku.databinding.ItemPriceBinding
 import com.app.makanku.utils.indonesianCurrency
 
-class PriceListAdapter (private val itemClick: (PriceItem) -> Unit) :
+class PriceListAdapter(private val itemClick: (PriceItem) -> Unit) :
     RecyclerView.Adapter<PriceListAdapter.PriceItemViewHolder>() {
-
     private val dataDiffer =
         AsyncListDiffer(
             this,
             object : DiffUtil.ItemCallback<PriceItem>() {
                 override fun areItemsTheSame(
                     oldItem: PriceItem,
-                    newItem: PriceItem
+                    newItem: PriceItem,
                 ): Boolean {
                     return oldItem.name == newItem.name
                 }
 
                 override fun areContentsTheSame(
                     oldItem: PriceItem,
-                    newItem: PriceItem
+                    newItem: PriceItem,
                 ): Boolean {
                     return oldItem.hashCode() == newItem.hashCode()
                 }
-            }
+            },
         )
 
     fun submitData(data: List<PriceItem>) {
@@ -38,13 +37,16 @@ class PriceListAdapter (private val itemClick: (PriceItem) -> Unit) :
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): PriceListAdapter.PriceItemViewHolder {
         val binding = ItemPriceBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PriceItemViewHolder(binding, itemClick)
     }
 
-    override fun onBindViewHolder(holder: PriceListAdapter.PriceItemViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: PriceListAdapter.PriceItemViewHolder,
+        position: Int,
+    ) {
         holder.bindView(dataDiffer.currentList[position])
     }
 
@@ -52,16 +54,14 @@ class PriceListAdapter (private val itemClick: (PriceItem) -> Unit) :
 
     class PriceItemViewHolder(
         private val binding: ItemPriceBinding,
-        val itemClick: (PriceItem) -> Unit
+        val itemClick: (PriceItem) -> Unit,
     ) : RecyclerView.ViewHolder(binding.root) {
-
         fun bindView(item: PriceItem) {
             with(item) {
                 binding.tvItemPrice.text = item.total.indonesianCurrency()
                 binding.tvItemTitle.text = item.name
                 itemView.setOnClickListener { itemClick(this) }
             }
-
         }
     }
 }

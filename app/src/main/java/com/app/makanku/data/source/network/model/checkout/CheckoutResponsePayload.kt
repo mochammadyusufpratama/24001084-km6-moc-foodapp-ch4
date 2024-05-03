@@ -12,5 +12,5 @@ data class CheckoutResponsePayload(
     @SerializedName("nama")
     val name: String?,
     @SerializedName("qty")
-    val qty: Int?
+    val qty: Int?,
 )

@@ -4,6 +4,7 @@ import com.app.makanku.data.datasource.user.UserPrefDataSource
 
 interface UserPrefRepository {
     fun isUsingGridMode(): Boolean
+
     fun setUsingGridMode(isUsingGridMode: Boolean)
 }
 
@@ -15,5 +16,4 @@ class UserPrefRepositoryImpl(private val dataSource: UserPrefDataSource) : UserP
     override fun setUsingGridMode(isUsingGridMode: Boolean) {
         return dataSource.setUsingGridMode(isUsingGridMode)
     }
-
 }

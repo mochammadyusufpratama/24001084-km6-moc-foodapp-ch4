@@ -12,7 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(private val repo: UserRepository) : ViewModel() {
-
     private val _changePhotoResult = MutableLiveData<ResultWrapper<Boolean>>()
     val changePhotoResult: LiveData<ResultWrapper<Boolean>>
         get() = _changePhotoResult
@@ -42,6 +41,7 @@ class ProfileViewModel(private val repo: UserRepository) : ViewModel() {
             }
         }
     }
+
     fun updateEmail(newEmail: String) =
         repo
             .updateEmail(newEmail)
@@ -50,5 +50,4 @@ class ProfileViewModel(private val repo: UserRepository) : ViewModel() {
     fun doLogout() = repo.doLogout()
 
     fun isUserLoggedOut() = repo.doLogout()
-
 }
